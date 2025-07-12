@@ -6,7 +6,7 @@ import os
 
 app = Flask(__name__)
 
-MONGO_URI = os.environ.get("MONGO_URI") or "mongodb+srv://abdul:<db_password>@abdul-cluster.vzvnqrd.mongodb.net/?retryWrites=true&w=majority&appName=abdul-cluster"
+MONGO_URI = os.environ.get("MONGO_URI") or "mongodb+srv://abdul:Ajstyle123@abdul-cluster.vzvnqrd.mongodb.net/?retryWrites=true&w=majority&appName=abdul-cluster"
 client = MongoClient(MONGO_URI)
 db = client["webhookDB"]
 events = db["events"]
