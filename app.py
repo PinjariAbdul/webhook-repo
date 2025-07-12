@@ -6,6 +6,11 @@ import os
 
 app = Flask(__name__)
 
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+
 MONGO_URI ="mongodb+srv://abdul:Ajstyle12345@abdul-cluster.vzvnqrd.mongodb.net/?retryWrites=true&w=majority&appName=abdul-cluster"
 client = MongoClient(MONGO_URI)
 db = client["webhookDB"]
