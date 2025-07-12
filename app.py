@@ -58,3 +58,6 @@ def github_webhook():
     except Exception as e:
         print("❌ Error while processing event:", e)
         return jsonify({"msg": "Failed to process"}), 500
+    
+if __name__ == "__main__":
+    app.run(debug=True)
