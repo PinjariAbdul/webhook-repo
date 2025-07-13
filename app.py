@@ -5,7 +5,8 @@ from datetime import datetime
 app = Flask(__name__)
 
 # ✅ MongoDB connection
-MONGO_URI = "mongodb+srv://abdul:Ajstyle12345@abdul-cluster.vzvnqrd.mongodb.net/?retryWrites=true&w=majority&appName=abdul-cluster"
+MONGO_URI ="mongodb+srv://abdul:Ajstyle12345@abdul-cluster.vzvnqrd.mongodb.net/webhookDB?retryWrites=true&w=majority"
+
 client = MongoClient(MONGO_URI, tls=True, tlsAllowInvalidCertificates=True)
 db = client["webhookDB"]
 events = db["events"]
@@ -24,7 +25,6 @@ def fetch_events():
         e["timestamp"] = e["timestamp"].strftime("%d %B %Y - %I:%M %p UTC")
     return jsonify(latest)
 
-# ✅ Webhook route - receives GitHub push, PR, merge events
 @app.route('/webhook', methods=['POST'])
 def github_webhook():
     data = request.json
@@ -34,7 +34,11 @@ def github_webhook():
     print(f"📦 Payload: {data}")
 
     try:
-        if event_type == "push":
+        if event_type == "ping":
+            print("✅ Ping event received from GitHub")
+            return jsonify({"msg": "Ping received"}), 200
+
+        elif event_type == "push":
             event = {
                 "type": "push",
                 "author": data["pusher"]["name"],
