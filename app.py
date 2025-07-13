@@ -5,8 +5,8 @@ from datetime import datetime
 app = Flask(__name__)
 
 # ✅ MongoDB connection
-MONGO_URI = "mongodb+srv://abdul:Ajstyle12345@abdul-cluster.vzvnqrd.mongodb.net/webhookDB?retryWrites=true&w=majority&appName=abdul-cluster"
-client = MongoClient(MONGO_URI)
+MONGO_URI = "mongodb+srv://abdul:Ajstyle12345@abdul-cluster.vzvnqrd.mongodb.net/?retryWrites=true&w=majority&appName=abdul-cluster"
+client = MongoClient(MONGO_URI, tls=True, tlsAllowInvalidCertificates=True)
 db = client["webhookDB"]
 events = db["events"]
 
